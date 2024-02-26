@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rui's Math Games (Sum)</title>
+    <style>
+        body {
+            background-color: #fff8e1; /* Cream background color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #question-container {
+            margin-bottom: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        h1 {
+            text-align: center;
+            color: #333; /* Dark gray color */
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666; /* Medium gray color */
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4caf50; /* Green button color */
+            color: #fff; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green button color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Rui's Math Games (Sum)</h1>
+        <div id="question-container">
+            <label for="question">Question:</label>
+            <span id="question"></span>
+        </div>
+        <div>
+            <label for="answer">Your Answer:</label>
+            <input type="number" id="answer">
+            <button onclick="checkAnswer()">Submit</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        var correctAnswer; // Variable to store the correct answer
+
+        function generateQuestion() {
+            var num1 = Math.floor(Math.random() * 100) + 1; // Generate random number between 1 and 10
+            var num2 = Math.floor(Math.random() * 100) + 1; // Generate random number between 1 and 10
+            var question = num1 + " + " + num2;
+            document.getElementById("question").textContent = question;
+            correctAnswer = num1 + num2; // Set the correct answer
+        }
+
+        function checkAnswer() {
+            var userAnswer = parseInt(document.getElementById("answer").value);
+            var resultContainer = document.getElementById("result");
+
+            if (isNaN(userAnswer)) {
+                resultContainer.textContent = "Please enter a valid number!";
+            } else {
+                if (userAnswer === correctAnswer) {
+                    resultContainer.textContent = "Correct! Well done!";
+                } else {
+                    resultContainer.textContent = "Incorrect! The correct answer is " + correctAnswer;
+                }
+            }
+
+            // Generate new question after checking the answer
+            generateQuestion();
+        }
+
+        // Initial question generation when the page loads
+        generateQuestion();
+
+        // Listen for the Enter key press on the input field
+        document.getElementById("answer").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        });
+    </script>
+</body>
+</html>
